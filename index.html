@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Test Task</title>
+</head>
+
+<body>
+<form id="calculation-form">
+    <label for="first-num">First number:</label><br>
+    <input type="number" id="first-num" name="first_number"><br>
+    <label for="second-num">Second number:</label><br>
+    <input type="number" id="second-num" name="second_number"><br><br>
+    <label for="operator">Choose an operator:</label>
+    <select name="calc_operator" id="operator">
+        <option value="sum">+</option>
+        <option value="sub">-</option>
+        <option value="multiply">*</option>
+        <option value="division">/</option>
+    </select><br><br>
+    <input type="submit" value="Submit">
+    <div style="display: none" id="result-div">Result: <span id="result"></span></div>
+</form>
+<script>
+    document.querySelector('form#calculation-form').addEventListener('submit', function (e) {
+        e.preventDefault()
+        let operator = this.elements.calc_operator.value;
+        let first_number = parseFloat(this.elements.first_number.value);
+        let second_number = parseFloat(this.elements.second_number.value);
+        let result = 0;
+        if (operator === "sum") {
+            result = parseInt(first_number + second_number);
+        } else if (operator === "sub") {
+            result = parseInt(first_number - second_number);
+        } else if (operator === "multiply") {
+            result = parseInt(first_number * second_number);
+        } else if (operator === "division") {
+            if (second_number == 0) {
+                result = "Division by zero"
+            } else {
+                result = parseInt(first_number / second_number);
+            }
+        }
+        document.querySelector("#result").innerHTML = result;
+        document.querySelector("#result-div").style.display = "block";
+    })
+</script>
+</body>
+</html>
